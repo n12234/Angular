@@ -1,0 +1,10 @@
+<app-header />
+<div class="main">
+    <div class="grid grid-cols-3 gap-10 mx-10">
+        <app-products-card 
+        *ngFor="let product of products"
+        [productChill] = "product"
+        />
+    </div>
+</div>
+<app-footer />
