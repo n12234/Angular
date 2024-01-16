@@ -24,8 +24,8 @@ export class HeaderComponent {
       path: '/'
     },
     {
-      label: 'Contact',
-      path: '/'
+      label: 'Admin',
+      path: '/admin/'
     },
   ]
 }
