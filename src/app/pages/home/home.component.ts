@@ -3,9 +3,10 @@ import { CommonModule, NgFor } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
-import { ProductsListComponent } from '../../components/products-card/products-card.component';
+import { ProductsCardComponent } from '../../components/products-card/products-card.component';
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../types/product";
+import { ProductDetailComponent } from "../product-detail/product-detail.component";
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ import { Product } from "../../types/product";
   imports: [
     HeaderComponent, 
     FooterComponent, 
-    ProductsListComponent, 
+    ProductsCardComponent, 
+    ProductDetailComponent,
     CommonModule, 
     RouterOutlet,
     NgFor

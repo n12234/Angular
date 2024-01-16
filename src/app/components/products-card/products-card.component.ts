@@ -1,13 +1,14 @@
-import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { RouterModule } from "@angular/router";
+import { Product } from "../../types/product";
 
 @Component({
   selector: 'app-products-card',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './products-card.component.html',
   styleUrl: './products-card.component.css'
 })
-export class ProductsListComponent {
-  @Input() productChill!: any;
+export class ProductsCardComponent {
+  @Input() product!: Product;
 }

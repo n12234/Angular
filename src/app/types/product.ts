@@ -1,3 +1,4 @@
+import { Category } from "./category";
 
 export type Product = {
   id: number;
@@ -11,3 +12,10 @@ export type Product = {
     count: number;
   };
 };
+
+export type ProductAdmin = Omit<Product, 'id' | 'category'> & {
+  id: number;
+  category: Category;
+}
+
+export type CreateProductForm = Omit<Product, 'id' | 'rating'>;
