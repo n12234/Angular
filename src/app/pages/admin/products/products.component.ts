@@ -24,7 +24,7 @@ export class ProductsComponent {
     }
 
     deleteProduct(id: number): void {
-      if (window.confirm('Do you really remove product?')) {
+      if (window.confirm('Bạn có muốn xoá sp này không?')) {
         this.productService
           .removeProduct(id)
           .subscribe(

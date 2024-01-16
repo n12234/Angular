@@ -43,7 +43,10 @@ export class EditComponent {
 
   handleSubmitForm() {
     if (!this.productId) return;
-    if (!this.product.title) return alert('Them ten san pham');
+    if (!this.product.title) return alert('Nhập tên san phẩm');
+    if (!this.product.price) return alert('Giá không được bỏ trống');
+    if (!this.product.description) return alert('Mô tả không được bỏ trống');
+    if (!this.product.category) return alert('Cần chọn danh mục sản phẩm');
     this.productService
       .updateProduct(this.productId, this.product)
       .subscribe(() => this.router.navigate(['/admin/products']));
