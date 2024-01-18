@@ -23,8 +23,12 @@ export class LoginComponent {
   handleSubmitForm() {
     if (!this.user.email || !this.user.password)
       return alert('Please fill email and password');
+    console.log(123);
+    
     this.authService.login(this.user).subscribe((res) => {
-      sessionStorage.setItem('token', JSON.stringify(res.token));
+      console.log(res);
+      
+      sessionStorage.setItem('token', JSON.stringify(res.accessToken));
       this.router.navigate(['/admin/products']);
     });
   }

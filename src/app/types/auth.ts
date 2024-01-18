@@ -4,5 +4,5 @@ export type LoginForm = {
   };
   
   export type LoginFormResponse = LoginForm & {
-    token: string;
+    accessToken: string;
   };

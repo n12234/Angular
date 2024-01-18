@@ -5,8 +5,8 @@ import { CreateProductForm, Product } from "../types/product";
 const options = {
   headers: {
     accept: 'application/json',
-    // Authorization:
-    //   'Bearer ',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5oYXRuZ28yMDEwMjAwMkBnbWFpbC5jb20iLCJpYXQiOjE3MDU1Nzg2NzYsImV4cCI6MTcwNTU4MjI3Niwic3ViIjoiYmNlOCJ9.1kedQyDiDWwF0BluDfnWsizGf5ZBX5Xt1DJWFbQ8Dss',
   },
 };
 
