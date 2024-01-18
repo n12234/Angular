@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ProductAdmin } from '../../../types/product';
+import { Product } from '../../../types/product';
 import { ProductService } from '../../../services/product.service';
 import { NgFor } from '@angular/common';
 import { DescriptionPipe } from "../../../pipes/description.pipe";
@@ -14,13 +14,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
-  productList: ProductAdmin[] = [];
+  products: Product[] = [];
   productService = inject(ProductService)
 
   ngOnInit(): void{
     this.productService
     .getProductListAdmin()
-    .subscribe((products) => (this.productList = products))
+    .subscribe((products) => (this.products = products))
     }
 
     deleteProduct(id: number): void {
@@ -29,7 +29,7 @@ export class ProductsComponent {
           .removeProduct(id)
           .subscribe(
             () =>
-              (this.productList = this.productList.filter(
+              (this.products = this.products.filter(
                 (product) => product.id !== id
               ))
           );

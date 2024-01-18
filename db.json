@@ -239,32 +239,35 @@
         "rate": 3.6,
         "count": 145
       }
-    },
-    {
-      "id": "e5dc",
-      "title": "san pham 4",
-      "description": "chat luong",
-      "image": "",
-      "category": "electronics",
-      "price": 3243
     }
   ],
   "categories": [
     {
       "_id": "men'clothing",
-      "title": "men'clothing"
+      "title": "men'clothing",
+      "id": "d6d8"
     },
     {
       "_id": "women'clothing",
-      "title": "women'clothing"
+      "title": "women'clothing",
+      "id": "9552"
     },
     {
       "_id": "electronics",
-      "title": "electronics"
+      "title": "electronics",
+      "id": "352a"
     },
     {
       "_id": "jewelery",
-      "title": "jewelery"
+      "title": "jewelery",
+      "id": "4d27"
+    }
+  ],
+  "users": [
+    {
+      "email": "nhatngo20102002@gmail.com",
+      "password": "$2a$12$3vi1gI8Uz/SBzrqssEYRx.tuGx1A1EBI6GQAUqNFfDgfETZwalsBW",
+      "id": "bce8"
     }
   ]
 }

@@ -1,17 +1,24 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { CreateProductForm, Product, ProductAdmin } from "../types/product";
+import { CreateProductForm, Product } from "../types/product";
+
+const options = {
+  headers: {
+    accept: 'application/json',
+    // Authorization:
+    //   'Bearer ',
+  },
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  apiUrl = "http://localhost:3000/products";
   http = inject(HttpClient)
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>(this.apiUrl)
+    return this.http.get<Product[]>('http://localhost:3000/products')
   }
 
   getProductDetail(id: number) {
@@ -19,7 +26,7 @@ export class ProductService {
   }
 
   getProductListAdmin() {
-    return this.http.get<ProductAdmin[]>(this.apiUrl)
+    return this.http.get<Product[]>('http://localhost:3000/products', options)
   }
 
   removeProduct(id: number) {
