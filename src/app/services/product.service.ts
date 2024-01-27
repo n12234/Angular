@@ -23,7 +23,7 @@ export class ProductService {
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>('https://back-end-bice-alpha.vercel.app')
+    return this.http.get<Product[]>('http://localhost:3000/products')
   }
 
   getProducts(categories: string[] | string): Observable<any[]> {
