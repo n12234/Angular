@@ -23,7 +23,7 @@ export class ProductService {
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>('https://vercel.com/nhatngos-projects-7aeb4cbf/angular-beckend/products')
+    return this.http.get<Product[]>('angular-beckend-6pf3mp34n-nhatngos-projects-7aeb4cbf.vercel.app/products')
   }
 
   getProducts(categories: string[] | string): Observable<any[]> {
