@@ -1,19 +1,24 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { CreateProductForm, Product } from "../types/product";
+import { CreateProductForm, Product, ProductResponse } from "../types/product";
+import { Category } from "../types/category";
+import { Observable } from 'rxjs';
 
-const options = {
+const chToken = {
   headers: {
     accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5oYXRuZ28yMDEwMjAwMkBnbWFpbC5jb20iLCJpYXQiOjE3MDU1Nzg2NzYsImV4cCI6MTcwNTU4MjI3Niwic3ViIjoiYmNlOCJ9.1kedQyDiDWwF0BluDfnWsizGf5ZBX5Xt1DJWFbQ8Dss',
-  },
-};
+    Authoization: 
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWZhOGE3Yzc5ODEzOTg5Nzk5Mjc4ZCIsImlhdCI6MTcwNjE3MzU3NiwiZXhwIjoxNzA2MjU5OTc2fQ.uXL0eTvSGx3dR0dwfp-0BgaUSbu_TMW8as28yCQiPO4'
+  }
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+
+  apiAdminUrl = 'http://localhost:3000/products'
+
   http = inject(HttpClient)
   constructor() { }
 
@@ -21,29 +26,37 @@ export class ProductService {
     return this.http.get<Product[]>('http://localhost:3000/products')
   }
 
-  getProductDetail(id: number) {
-    return this.http.get<Product>('http://localhost:3000/products/' + id);
+  getProducts(categories: string[] | string): Observable<any[]> {
+    const categoryArray = Array.isArray(categories) ? categories : [categories];
+    const categoryParam = categoryArray.length > 0 ? `?category=${categoryArray.join(',')}` : '';
+    const url = `${this.apiAdminUrl}${categoryParam}`;
+    return this.http.get<any[]>(url);
   }
 
-  getProductListAdmin() {
-    return this.http.get<Product[]>('http://localhost:3000/products', options)
+  getProductDetail(_id: string) {
+    return this.http.get<Product>('http://localhost:3000/products/' + _id);
   }
 
-  removeProduct(id: number) {
-    return this.http.delete<Product>('http://localhost:3000/products/' + id);
+  searchProducts(keyword: string): Observable<any> {
+    const url = `${this.apiAdminUrl}/search?keyword=${keyword}`;
+    return this.http.get(url);
+  }
+
+  removeProduct(_id: string) {
+    return this.http.delete<Product>('http://localhost:3000/products/' + _id, chToken);
   }
 
   createProduct(product: CreateProductForm) {
     return this.http.post<Product>(
       'http://localhost:3000/products/',
-      product
+      product, chToken
     );
   }
 
-  updateProduct(productId: number, product: CreateProductForm) {
+  updateProduct(productId: string, product: CreateProductForm) {
     return this.http.put<Product>(
       'http://localhost:3000/products/' + productId,
-      product
+      product, chToken
     );
   }
 }

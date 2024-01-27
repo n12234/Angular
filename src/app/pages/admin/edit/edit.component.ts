@@ -16,7 +16,7 @@ import { NgFor } from '@angular/common';
   styleUrl: './edit.component.css'
 })
 export class EditComponent {
-  productId: number | undefined;
+  productId: string | undefined;
   categories: Category[] = [];
   product: CreateProductForm = {
     title: '',
@@ -24,6 +24,7 @@ export class EditComponent {
     image: '',
     category: '',
     price: 0,
+    // count: ''
   };
 
   productService = inject(ProductService);
@@ -59,5 +60,6 @@ export class EditComponent {
     this.productService
       .updateProduct(this.productId, this.product)
       .subscribe(() => this.router.navigate(['/admin/products']));
+      alert('Update thành công!!!')
   }
 }

@@ -1,21 +1,27 @@
 import { Category } from "./category";
 
+
 export type Product = {
-  id: number;
+  _id: string;
   title: string;
   image: string;
   price: number;
   description: string;
   category: string;
-  rating: {
-    rate: number;
-    count: number;
-  };
+  rate: number;
+  count: string;
 };
 
-export type ProductAdmin = Omit<Product, 'id' | 'category'> & {
-  id: number;
+export type ProductAdmin = Omit<Product, '_id' | 'category'> & {
+  _id: string;
   category: Category;
 }
 
-export type CreateProductForm = Omit<Product, 'id' | 'rating'>;
+export type CreateProductForm = Omit<Product, '_id' | 'rate' | 'count'>;
+
+export type ProductResponse = {
+  total: number;
+  page: number;
+  limit: number;
+  data: Product[];
+};

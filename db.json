@@ -5,7 +5,7 @@
       "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
       "price": 109.95,
       "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "category": "jewelery",
+      "category": "men'clothing",
       "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
       "rating": {
         "rate": 3.9,
@@ -239,36 +239,24 @@
         "rate": 3.6,
         "count": 145
       }
-    },
-    {
-      "title": "san pham 4",
-      "description": "chat luong",
-      "image": "",
-      "category": "electronics",
-      "price": 2342134,
-      "id": "i4ith-L"
     }
   ],
   "categories": [
     {
       "_id": "men'clothing",
-      "title": "men'clothing",
-      "id": "d6d8"
+      "title": "men'clothing"
     },
     {
       "_id": "women'clothing",
-      "title": "women'clothing",
-      "id": "9552"
+      "title": "women'clothing"
     },
     {
       "_id": "electronics",
-      "title": "electronics",
-      "id": "352a"
+      "title": "electronics"
     },
     {
       "_id": "jewelery",
-      "title": "jewelery",
-      "id": "4d27"
+      "title": "jewelery"
     }
   ],
   "users": [
@@ -276,6 +264,11 @@
       "email": "nhatngo20102002@gmail.com",
       "password": "$2a$12$3vi1gI8Uz/SBzrqssEYRx.tuGx1A1EBI6GQAUqNFfDgfETZwalsBW",
       "id": "bce8"
+    },
+    {
+      "email": "nhatnvph30128@gmail.com",
+      "password": "$2a$10$d1aRF5vRrow72zNZlXgAr.dBxaz3rfyenMHnq5UNt3ceU4bll0kqK",
+      "id": "6HsqWAY"
     }
   ]
 }

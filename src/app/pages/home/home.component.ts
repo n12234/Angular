@@ -27,10 +27,37 @@ export class HomeComponent {
   products: Product[] = [];
   productService = inject(ProductService)
 
+  // ngOnChanges() {
+  //   console.log('1 -ngOnChanges');
+  // }
+
   ngOnInit(): void{
     this.productService
     .getProductList()
     .subscribe((products) => (this.products = products))
+
+  //   console.log(' 2- ngOnInit');
   }
+  // ngDoCheck() {
+  //   console.log('3 -ngDoCheck');
+  // }
+
+  // ngAfterContentInit() {
+  //   console.log('4 -ngAfterContentInit');
+  // }
+
+  // ngAfterContentChecked() {
+  //   console.log('5 -ngAfterContentChecked');
+  // }
+
+  // ngAfterViewInit() {
+  //   console.log('6 -ngAfterViewInit');
+  // }
+  // ngAfterViewChecked() {
+  //   console.log('7 -ngAfterViewChecked');
+  // }
+  // ngOnDestroy() {
+  //   console.log('8- ngOnDestroy');
+  // }
 
 }

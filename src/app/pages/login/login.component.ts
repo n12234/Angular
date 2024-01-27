@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoginForm } from '../../types/auth';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -12,24 +13,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  user: LoginForm = {
-    email: '',
-    password: ''
-  };
+    email = '';
+    password = '';
+  
+  constructor(
+    private authService: AuthService, 
+    private router: Router) {}
 
-  authService = inject(AuthService);
-  router = inject(Router);
+  login(): void {
+    this.authService.login(this.email, this.password).subscribe(
+      (res) => {
+        sessionStorage.setItem('token', JSON.stringify(res.accessToken));
+        this.router.navigate(['/admin/products']);
+        alert('Đăng nhập thành công!!!')
+      },
+      error => {
+        console.error('Đăng nhập không thành công:', error);
+        alert('Đăng nhập không thành công. Vui lòng kiểm tra lại thông tin đăng nhập.');
+      }
+    );
 
-  handleSubmitForm() {
-    if (!this.user.email || !this.user.password)
-      return alert('Please fill email and password');
-    console.log(123);
-    
-    this.authService.login(this.user).subscribe((res) => {
-      console.log(res);
-      
-      sessionStorage.setItem('token', JSON.stringify(res.accessToken));
-      this.router.navigate(['/admin/products']);
-    });
   }
 }

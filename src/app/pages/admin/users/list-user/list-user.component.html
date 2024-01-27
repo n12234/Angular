@@ -1,0 +1,44 @@
+<h1 class="font-bold text-3xl mb-5">Users List</h1>
+<!-- <a 
+  class="bg-green-600 py-2 px-6 text-white font-bold rounded-t-lg"
+  routerLink="/admin/categories/create"
+>Add Category</a> -->
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg w-[600px]">
+    <table
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
+      <thead
+        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      >
+        <tr>
+          <th scope="col" class="px-6 py-3">Tên người dùng</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users"
+          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+        >
+        <th
+            scope="row"
+            class="w-[200px] px-6 py-4 font-medium text-gray-900 dark:text-white"
+          >
+            {{user.name}}
+          </th>
+          <th
+            scope="row"
+            class="w-[200px] px-6 py-4 font-medium text-gray-900 dark:text-white"
+          >
+            {{user.email}}
+          </th>
+          <td class="px-6 py-4">
+            <a
+            [routerLink]="['/admin/user', user._id]"
+              class="font-medium text-white border border-blue-600 rounded-lg px-3 py-1 bg-blue-600 dark:text-blue-500 hover:underline"
+              >Edit</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

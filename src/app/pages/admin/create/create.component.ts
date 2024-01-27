@@ -19,9 +19,9 @@ export class CreateComponent {
   product: CreateProductForm = {
     title: '',
     description: '',
-    image: '',
     category: '',
     price: 0,
+    image: '',
   };
 
   productService = inject(ProductService);
@@ -42,5 +42,6 @@ export class CreateComponent {
     this.productService
       .createProduct(this.product)
       .subscribe(() => this.router.navigate(['/admin/products']));
+      alert('Thêm thành công!!!')
   }
 }

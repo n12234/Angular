@@ -12,9 +12,11 @@ import { NgFor } from '@angular/common';
     RouterOutlet, 
     SidebarComponent, 
     ProductsComponent, 
-    NgFor],
+    NgFor,
+  ],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css',
 })
 export class AdminComponent{
+  
 }
