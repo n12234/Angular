@@ -4,20 +4,20 @@ import { CreateProductForm, Product, ProductResponse } from "../types/product";
 import { Category } from "../types/category";
 import { Observable } from 'rxjs';
 
-const chToken = {
-  headers: {
-    accept: 'application/json',
-    Authoization: 
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWZhOGE3Yzc5ODEzOTg5Nzk5Mjc4ZCIsImlhdCI6MTcwNjE3MzU3NiwiZXhwIjoxNzA2MjU5OTc2fQ.uXL0eTvSGx3dR0dwfp-0BgaUSbu_TMW8as28yCQiPO4'
-  }
-}
+// const chToken = {
+//   headers: {
+//     accept: 'application/json',
+//     Authoization: 
+//       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YWZhOGE3Yzc5ODEzOTg5Nzk5Mjc4ZCIsImlhdCI6MTcwNjE3MzU3NiwiZXhwIjoxNzA2MjU5OTc2fQ.uXL0eTvSGx3dR0dwfp-0BgaUSbu_TMW8as28yCQiPO4'
+//   }
+// }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products'
+  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/api/products'
 
   http = inject(HttpClient)
   constructor() { }
@@ -43,20 +43,20 @@ export class ProductService {
   }
 
   removeProduct(_id: string) {
-    return this.http.delete<Product>('http://localhost:3000/products/' + _id, chToken);
+    return this.http.delete<Product>('http://localhost:3000/products/' + _id);
   }
 
   createProduct(product: CreateProductForm) {
     return this.http.post<Product>(
       'http://localhost:3000/products/',
-      product, chToken
+      product
     );
   }
 
   updateProduct(productId: string, product: CreateProductForm) {
     return this.http.put<Product>(
       'http://localhost:3000/products/' + productId,
-      product, chToken
+      product
     );
   }
 }
