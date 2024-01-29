@@ -17,13 +17,13 @@ const chToken = {
 })
 export class ProductService {
 
-  apiAdminUrl = 'http://localhost:3000/products'
+  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products'
 
   http = inject(HttpClient)
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>('http://localhost:3000/products')
+    return this.http.get<Product[]>('https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products')
   }
 
   getProducts(categories: string[] | string): Observable<any[]> {
