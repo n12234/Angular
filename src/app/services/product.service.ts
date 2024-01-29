@@ -17,13 +17,13 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/api/products'
+  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products'
 
   http = inject(HttpClient)
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>('https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products')
+    return this.http.get<Product[]>('https://nodejs-rose-psi.vercel.app/api/products')
   }
 
   getProducts(categories: string[] | string): Observable<any[]> {
