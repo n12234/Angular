@@ -6,6 +6,7 @@ import { FormsModule } from "@angular/forms";
 import { NgFor } from "@angular/common";
 import { Category } from "../../../types/category";
 import { CategoryService } from '../../../services/category.service';
+import { SweetalertService } from '../../../services/sweetalert.service';
 
 @Component({
   selector: 'app-create',
@@ -24,6 +25,7 @@ export class CreateComponent {
     image: '',
   };
 
+  sweetalertService = inject(SweetalertService)
   productService = inject(ProductService);
   categoryService = inject(CategoryService);
   router = inject(Router);
@@ -42,6 +44,6 @@ export class CreateComponent {
     this.productService
       .createProduct(this.product)
       .subscribe(() => this.router.navigate(['/admin/products']));
-      alert('Thêm thành công!!!')
+      this.sweetalertService.success('Success', 'Thêm sản phẩm thành công!')
   }
 }

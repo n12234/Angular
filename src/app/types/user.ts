@@ -5,4 +5,5 @@ export type User = {
     password: string;
   };
 
-  export type CreateUserForm = Omit<User, '_id' | 'password'>;
+  export type EditUserForm = Omit<User, '_id' | 'password'>;
+  export type CreateUserForm = Omit<User, '_id'>;

@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { LoginForm } from '../../types/auth';
+import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-register',
@@ -18,18 +19,19 @@ export class RegisterComponent {
 
 constructor(
   private authService: AuthService, 
-  private router: Router) {}
+  private router: Router,
+  private sweetalertService: SweetalertService
+  ) {}
 
 register(): void {
   this.authService.register(this.fullname, this.email, this.password).subscribe(
     (res) => {
       sessionStorage.setItem('token', JSON.stringify(res.accessToken));
       this.router.navigate(['/login']);
-      alert('Đăng kí thành công')
+      this.sweetalertService.success('Success', 'Đăng kí thành công')
     },
       error => {
-        console.error('Đăng ký không thành công:', error);
-        alert('Đăng ký không thành công. Vui lòng kiểm tra lại thông tin đăng ký.');
+        this.sweetalertService.error('Error', 'Đăng kí không thành công, vui lòng kiểm tra lại!')
       }
     );
   }

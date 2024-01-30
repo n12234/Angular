@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateCategoryForm } from '../../../../types/category';
 import { CategoryService } from '../../../../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SweetalertService } from '../../../../services/sweetalert.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -20,6 +21,7 @@ export class EditCategoryComponent {
     slug: ''
   };
 
+  sweetalertService = inject(SweetalertService)
   categoryService = inject(CategoryService);
   router = inject(Router);
   route = inject(ActivatedRoute);
@@ -45,6 +47,6 @@ export class EditCategoryComponent {
     this.categoryService
       .updateCategory(this.categoryId, this.category)
       .subscribe(() => this.router.navigate(['/admin/categories']));
-      alert('Update thành công!!!')
+      this.sweetalertService.success('Success', 'Update thành công!')
   }
 }

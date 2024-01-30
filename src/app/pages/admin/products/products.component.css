@@ -5,3 +5,5 @@ button {
   .active {
     font-weight: bold;
   }
+
+  @import "~sweetalert2/src/sweetalert2.scss";

@@ -13,6 +13,7 @@ import { CreateCategoryComponent } from './pages/admin/categories/create-categor
 import { EditCategoryComponent } from './pages/admin/categories/edit-category/edit-category.component';
 import { ListUserComponent } from './pages/admin/users/list-user/list-user.component';
 import { EditUserComponent } from './pages/admin/users/edit-user/edit-user.component';
+import { CreateUserComponent } from './pages/admin/users/create-user/create-user.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -31,6 +32,7 @@ export const routes: Routes = [
             { path: 'categories/create', component: CreateCategoryComponent },
             { path: 'category/:id', component: EditCategoryComponent },
             { path: 'users', component: ListUserComponent },
+            { path: 'users/create', component: CreateUserComponent },
             { path: 'user/:id', component: EditUserComponent },
         ],
     }

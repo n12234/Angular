@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CreateCategoryForm } from '../../../../types/category';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../../services/category.service';
+import { SweetalertService } from '../../../../services/sweetalert.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class CreateCategoryComponent {
   };
 
   categoryService = inject(CategoryService);
+  sweetalertService = inject(SweetalertService)
   router = inject(Router);
 
   handleSubmitForm() {
@@ -29,6 +31,6 @@ export class CreateCategoryComponent {
     this.categoryService
       .CreateCategory(this.category)
       .subscribe(() => this.router.navigate(['/admin/categories']));
-      alert('Thêm thành công!!!')
+      this.sweetalertService.success('Success', 'Thêm danh mục thành công!')
   }
 }

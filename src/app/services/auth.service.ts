@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoginForm, LoginFormResponse } from '../types/auth';
 import { Observable, tap } from 'rxjs';
-import { CreateUserForm, User } from '../types/user';
+import { CreateUserForm, EditUserForm, User } from '../types/user';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +23,11 @@ export class AuthService {
     return this.http.get<User>('https://nodejs-rose-psi.vercel.app/users/' + _id);
   }
 
-  updateUser(userId: string, user: CreateUserForm) {
+  createUser(username: string, email: string, password: string): Observable<any> {
+    return this.http.post('https://nodejs-rose-psi.vercel.app/users', {username, email, password})
+  }
+
+  updateUser(userId: string, user: EditUserForm) {
     return this.http.put<User>(
       'https://nodejs-rose-psi.vercel.app/users/' + userId,
       user

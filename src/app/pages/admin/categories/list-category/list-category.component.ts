@@ -2,6 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CategoryService } from '../../../../services/category.service';
+import { SweetalertService } from '../../../../services/sweetalert.service';
 
 @Component({
   selector: 'app-list-category',
@@ -12,7 +13,9 @@ import { CategoryService } from '../../../../services/category.service';
 })
 export class ListCategoryComponent {
   categories: any[] = [];
+
   categoryService = inject(CategoryService);
+  sweetalertService = inject(SweetalertService)
 
   ngOnInit(): void {
     this.categoryService
@@ -20,9 +23,10 @@ export class ListCategoryComponent {
       .subscribe((categories) => (this.categories = categories));
   }
 
-  deleteCategory(_id: string): void {
+  async deleteCategory(_id: string){
+    const confirmed = await this.sweetalertService.confirm('Bạn có muốn xoá không?', 'This action cannot be undone.');
     try {
-      if (window.confirm('Bạn có muốn xoá danh mục này không?')) {
+      if (confirmed) {
         this.categoryService
           .removeCategory(_id)
           .subscribe(
@@ -31,10 +35,10 @@ export class ListCategoryComponent {
                 (category) => category._id !== _id
               ))
           );
-        alert('Xoá thành công!!!');
+          this.sweetalertService.success('Success', 'Update thành công!')
       }
     } catch (error) {
-      console.log(error);
+      this.sweetalertService.error('Error', 'Xoá không thành công!')
     }
   }
 }

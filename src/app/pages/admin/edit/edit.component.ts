@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { CreateProductForm } from '../../../types/product';
 import { ProductService } from '../../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { Category } from '../../../types/category';
 import { NgFor } from '@angular/common';
+import { SweetalertService } from '../../../services/sweetalert.service';
 
 
 @Component({
@@ -26,10 +27,10 @@ export class EditComponent {
     price: 0,
   };
 
+  sweetalertService = inject(SweetalertService)
   productService = inject(ProductService);
   categoryService = inject(CategoryService);
   router = inject(Router);
-
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
@@ -61,6 +62,6 @@ export class EditComponent {
     this.productService
       .updateProduct(this.productId, this.product)
       .subscribe(() => this.router.navigate(['/admin/products']));
-      alert('Update thành công!!!')
+      this.sweetalertService.success('Success', 'Update thành công!')
   }
 }

@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CreateUserForm } from '../../../../types/user';
+import { EditUserForm } from '../../../../types/user';
 import { FormsModule } from '@angular/forms';
 import { NgFor } from '@angular/common';
+import { SweetalertService } from '../../../../services/sweetalert.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,11 +15,12 @@ import { NgFor } from '@angular/common';
 })
 export class EditUserComponent {
   userId: string | undefined;
-  user: CreateUserForm = {
+  user: EditUserForm = {
     username: '',
     email: '',
   };
 
+  sweetalertService = inject(SweetalertService)
   authService = inject(AuthService);
   router = inject(Router);
   route = inject(ActivatedRoute);
@@ -43,6 +45,6 @@ export class EditUserComponent {
     this.authService
       .updateUser(this.userId, this.user)
       .subscribe(() => this.router.navigate(['/admin/users']));
-      alert('Update thành công!!!')
+      this.sweetalertService.success('Success', 'Update thành công!')
   }
 }

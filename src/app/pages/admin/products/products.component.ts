@@ -4,12 +4,12 @@ import { ProductService } from '../../../services/product.service';
 import { NgFor, NgIf } from '@angular/common';
 import { DescriptionPipe } from '../../../pipes/description.pipe';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LoginFormResponse } from '../../../types/auth';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import Swal from 'sweetalert2';
+import { SweetalertService } from '../../../services/sweetalert.service';
 
 @Component({
   selector: 'app-products',
@@ -38,7 +38,10 @@ export class ProductsComponent {
 
   productService = inject(ProductService);
   categoryService = inject(CategoryService);
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private sweetalertService: SweetalertService
+    ) {}
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
@@ -110,9 +113,10 @@ export class ProductsComponent {
   //   this.goToPage(this.currentPage - 1);
   // }
 
-  deleteProduct(_id: string): void {
+  async deleteProduct (_id: string) {
+    const confirmed = await this.sweetalertService.confirm('Bạn có muốn xoá không?', 'This action cannot be undone.');
     try {
-      if (window.confirm('Bạn có muốn xoá sp này không?')) {
+      if (confirmed) {
         this.productService
           .removeProduct(_id)
           .subscribe(
@@ -121,11 +125,10 @@ export class ProductsComponent {
                 (product) => product._id !== _id
               ))
           );
-          alert('Xoá thành công!!!');
+          this.sweetalertService.success('Success', 'Xoá thành công!')
       }
     } catch (error) {
-      console.log(error);
-      
+      this.sweetalertService.error('Error', 'Xoá không thành công!')
     }
   }
 }
