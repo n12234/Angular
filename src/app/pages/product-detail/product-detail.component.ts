@@ -31,13 +31,13 @@ export class ProductDetailComponent implements OnInit{
       (data) => {
         this.product = data;
         this.category = data.category
-        console.log(data),
         
         this.productService.getProductList().subscribe((products) => {
           const result = products.filter((item) => {
            return item.category === this.product.category && item._id !== this.id
           })
-          this.relatedProduct = result; 
+          this.relatedProduct = result;
+
         })
       },
       (error) => {

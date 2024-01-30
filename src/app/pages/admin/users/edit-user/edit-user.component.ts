@@ -15,7 +15,7 @@ import { NgFor } from '@angular/common';
 export class EditUserComponent {
   userId: string | undefined;
   user: CreateUserForm = {
-    name: '',
+    username: '',
     email: '',
   };
 

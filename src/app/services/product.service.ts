@@ -17,7 +17,8 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  apiAdminUrl = 'https://back-jycd4pruc-nhatngos-projects-7aeb4cbf.vercel.app/products'
+  // apiAdminUrl = 'http://localhost:8000/api/products'
+  apiAdminUrl = 'https://nodejs-rose-psi.vercel.app/api/products'
 
   http = inject(HttpClient)
   constructor() { }
@@ -34,7 +35,7 @@ export class ProductService {
   }
 
   getProductDetail(_id: string) {
-    return this.http.get<Product>('http://localhost:3000/products/' + _id);
+    return this.http.get<Product>('https://nodejs-rose-psi.vercel.app/api/products/' + _id);
   }
 
   searchProducts(keyword: string): Observable<any> {
@@ -43,19 +44,19 @@ export class ProductService {
   }
 
   removeProduct(_id: string) {
-    return this.http.delete<Product>('http://localhost:3000/products/' + _id);
+    return this.http.delete<Product>('https://nodejs-rose-psi.vercel.app/api/products/' + _id);
   }
 
   createProduct(product: CreateProductForm) {
     return this.http.post<Product>(
-      'http://localhost:3000/products/',
+      'https://nodejs-rose-psi.vercel.app/api/products/',
       product
     );
   }
 
   updateProduct(productId: string, product: CreateProductForm) {
     return this.http.put<Product>(
-      'http://localhost:3000/products/' + productId,
+      'https://nodejs-rose-psi.vercel.app/api/products/' + productId,
       product
     );
   }

@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  private apiUrl = 'http://localhost:3000/categories';
+  private apiUrl = 'https://nodejs-rose-psi.vercel.app/categories';
 
   http = inject(HttpClient);
 
   getCategoryListAll(): Observable<any> {
-    return this.http.get<any[]>('http://localhost:3000/categories/list');
+    return this.http.get<any[]>('https://nodejs-rose-psi.vercel.app/categories/list');
   }
 
   getCategoryList(): Observable<any> {
@@ -25,24 +25,24 @@ export class CategoryService {
     return this.http.get<string[]>(url);
   }
 
-  categoryProduct(category: CreateCategoryForm) {
+  CreateCategory(category: CreateCategoryForm) {
     return this.http.post<Category>(
-      'http://localhost:3000/categories/',
+      'https://nodejs-rose-psi.vercel.app/categories/',
       category
     );
   }
 
   getCategoryDetail(_id: string) {
-    return this.http.get<Category>('http://localhost:3000/categories/' + _id);
+    return this.http.get<Category>('https://nodejs-rose-psi.vercel.app/categories/' + _id);
   }
 
   removeCategory(_id: string) {
-    return this.http.delete<Category>('http://localhost:3000/categories/' + _id);
+    return this.http.delete<Category>('https://nodejs-rose-psi.vercel.app/categories/' + _id);
   }
 
   updateCategory(categoryId: string, category: CreateCategoryForm) {
     return this.http.put<Category>(
-      'http://localhost:3000/categories/' + categoryId,
+      'https://nodejs-rose-psi.vercel.app/categories/' + categoryId,
       category
     );
   }

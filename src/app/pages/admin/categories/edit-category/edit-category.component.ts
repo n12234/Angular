@@ -17,6 +17,7 @@ export class EditCategoryComponent {
   category: CreateCategoryForm = {
     title: '',
     description: '',
+    slug: ''
   };
 
   categoryService = inject(CategoryService);

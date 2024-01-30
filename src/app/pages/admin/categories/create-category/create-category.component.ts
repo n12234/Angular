@@ -17,6 +17,7 @@ export class CreateCategoryComponent {
   category: CreateCategoryForm = {
     title: '',
     description: '',
+    slug: ''
   };
 
   categoryService = inject(CategoryService);
@@ -26,7 +27,7 @@ export class CreateCategoryComponent {
     if (!this.category.title) return alert('Nhập tên danh mục');
     if (!this.category.description) return alert('Cần nhập mô tả danh mục');
     this.categoryService
-      .categoryProduct(this.category)
+      .CreateCategory(this.category)
       .subscribe(() => this.router.navigate(['/admin/categories']));
       alert('Thêm thành công!!!')
   }

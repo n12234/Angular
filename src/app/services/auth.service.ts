@@ -9,23 +9,23 @@ import { CreateUserForm, User } from '../types/user';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000/auth';
+  private apiUrl = 'https://nodejs-rose-psi.vercel.app/auth';
 
   private tokenKey = 'access_token';
 
   constructor(private http: HttpClient) {}
 
   getAllUserList(): Observable<any> {
-    return this.http.get<any[]>('http://localhost:3000/users');
+    return this.http.get<any[]>('https://nodejs-rose-psi.vercel.app/users');
   }
 
   getUserDetail(_id: string) {
-    return this.http.get<User>('http://localhost:3000/users/' + _id);
+    return this.http.get<User>('https://nodejs-rose-psi.vercel.app/users/' + _id);
   }
 
   updateUser(userId: string, user: CreateUserForm) {
     return this.http.put<User>(
-      'http://localhost:3000/users/' + userId,
+      'https://nodejs-rose-psi.vercel.app/users/' + userId,
       user
     );
   }
@@ -40,8 +40,8 @@ export class AuthService {
     );
   }
 
-  register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, {name, email, password});
+  register(fullname: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, {fullname, email, password});
   }
 
   isAuthenticated(): boolean {

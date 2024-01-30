@@ -12,7 +12,7 @@ import { LoginForm } from '../../types/auth';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  name =  '';
+  fullname =  '';
   email = '';
   password = '';
 
@@ -21,7 +21,7 @@ constructor(
   private router: Router) {}
 
 register(): void {
-  this.authService.register(this.name, this.email, this.password).subscribe(
+  this.authService.register(this.fullname, this.email, this.password).subscribe(
     (res) => {
       sessionStorage.setItem('token', JSON.stringify(res.accessToken));
       this.router.navigate(['/login']);
