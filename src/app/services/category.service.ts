@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  private apiUrl = 'http://localhost:8000/categories';
+  private apiUrl = 'https://nodejs-rose-psi.vercel.app/categories';
 
   http = inject(HttpClient);
 
