@@ -24,7 +24,6 @@ export class EditComponent {
     image: '',
     category: '',
     price: 0,
-    // count: ''
   };
 
   productService = inject(ProductService);
@@ -42,6 +41,8 @@ export class EditComponent {
     this.categoryService
       .getCategoryList()
       .subscribe((categories) => (this.categories = categories));
+      console.log(this.categories);
+      
   }
 
   getProductById() {

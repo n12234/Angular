@@ -61,21 +61,7 @@ export class ProductsComponent {
       });
   }
 
-  // setupForm(): void {
-  //   const categoryControls = this.categories.map(
-  //     (category) => new FormControl(false)
-  //   );
-  //   this.filterForm = new FormGroup({
-  //     categories: new FormGroup(Object.fromEntries(categoryControls)),
-  //   });
-  // }
-
   filterProductsByCategories(): void {
-    // const selectedCategories = Object.keys(
-    //   this.filterForm.value.categories
-    // ).filter((category) => this.filterForm.value.categories[category]);
-
-    // this.selectedCategories = selectedCategories;
     this.loadProducts();
   }
 
@@ -125,16 +111,21 @@ export class ProductsComponent {
   // }
 
   deleteProduct(_id: string): void {
-    if (window.confirm('Bạn có muốn xoá sp này không?')) {
-      this.productService
-        .removeProduct(_id)
-        .subscribe(
-          () =>
-            (this.products = this.products.filter(
-              (product) => product._id !== _id
-            ))
-        );
+    try {
+      if (window.confirm('Bạn có muốn xoá sp này không?')) {
+        this.productService
+          .removeProduct(_id)
+          .subscribe(
+            () =>
+              (this.products = this.products.filter(
+                (product) => product._id !== _id
+              ))
+          );
+          alert('Xoá thành công!!!');
+      }
+    } catch (error) {
+      console.log(error);
+      
     }
-    alert('Xoá thành công!!!');
   }
 }
