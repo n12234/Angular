@@ -21,16 +21,20 @@ export class ListCategoryComponent {
   }
 
   deleteCategory(_id: string): void {
-    if (window.confirm('Bạn có muốn xoá danh mục này không?')) {
-      this.categoryService
-        .removeCategory(_id)
-        .subscribe(
-          () =>
-            (this.categories = this.categories.filter(
-              (category) => category._id !== _id
-            ))
-        );
+    try {
+      if (window.confirm('Bạn có muốn xoá danh mục này không?')) {
+        this.categoryService
+          .removeCategory(_id)
+          .subscribe(
+            () =>
+              (this.categories = this.categories.filter(
+                (category) => category._id !== _id
+              ))
+          );
+        alert('Xoá thành công!!!');
+      }
+    } catch (error) {
+      console.log(error);
     }
-    alert('Xoá thành công!!!');
   }
 }
