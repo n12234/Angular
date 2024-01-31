@@ -7,45 +7,37 @@ import Swal from 'sweetalert2';
 export class SweetalertService {
 
 
+  // showAlert(title: string, message: string, type: 'success' | 'error' | 'warning' = 'success', timer = 2000) {
+  //   Swal.fire({
+  //     title: title,
+  //     text: message,
+  //     icon: type,
+  //     timer: timer,
+  //     showConfirmButton: false
+  //   });
+  // }
+
   // Display a success alert
-  success(title: string, text: string): void {
+  success(title: string, text: string, timer = 1000): void {
     Swal.fire({
       title,
       text,
+      timer: timer,
       icon: 'success',
-      confirmButtonText: 'OK',
-    });
+      showConfirmButton: false
+    })
   }
 
   // Display an error alert
-  error(title: string, text: string): void {
+  error(title: string, text: string, timer = 1000): void {
     Swal.fire({
       title,
       text,
+      timer: timer,
       icon: 'error',
-      confirmButtonText: 'OK',
+      showConfirmButton: false
     });
   }
-
-  // // Display an info alert
-  // info(title: string, text: string): void {
-  //   Swal.fire({
-  //     title,
-  //     text,
-  //     icon: 'info',
-  //     confirmButtonText: 'OK',
-  //   });
-  // }
-
-  // // Display a warning alert
-  // warning(title: string, text: string): void {
-  //   Swal.fire({
-  //     title,
-  //     text,
-  //     icon: 'warning',
-  //     confirmButtonText: 'OK',
-  //   });
-  // }
 
   // Display a confirmation alert
   confirm(title: string, text: string): Promise<boolean> {

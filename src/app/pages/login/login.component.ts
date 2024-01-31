@@ -3,11 +3,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { SweetalertService } from '../../services/sweetalert.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,6 +21,8 @@ export class LoginComponent {
     private router: Router,
     private sweetalertService: SweetalertService
     ) {}
+
+    validateForm() {}
 
   login(): void {
     this.authService.login(this.email, this.password).subscribe(

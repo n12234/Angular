@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { LoginForm } from '../../types/auth';
+import {  FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 import { SweetalertService } from '../../services/sweetalert.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule, RouterLink, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -17,13 +17,15 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-constructor(
-  private authService: AuthService, 
-  private router: Router,
-  private sweetalertService: SweetalertService
-  ) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private sweetalertService: SweetalertService,
+    ) {}
 
-register(): void {
+  validateForm() {}
+
+  register(): void {
   this.authService.register(this.fullname, this.email, this.password).subscribe(
     (res) => {
       sessionStorage.setItem('token', JSON.stringify(res.accessToken));

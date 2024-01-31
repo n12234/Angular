@@ -1,8 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, LoginFormResponse } from '../types/auth';
 import { Observable, tap } from 'rxjs';
-import { CreateUserForm, EditUserForm, User } from '../types/user';
+import { EditUserForm, User } from '../types/user';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +36,8 @@ export class AuthService {
   login( email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, {email, password})
     .pipe(
-      tap((response: any) => {
-        const token = response.accessToken;
+      tap((res: any) => {
+        const token = res.accessToken;
         this.setToken(token);
       })
     );
