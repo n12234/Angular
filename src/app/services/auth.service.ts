@@ -33,6 +33,10 @@ export class AuthService {
     );
   }
 
+  removeProduct(_id: string) {
+    return this.http.delete<User>('https://nodejs-rose-psi.vercel.app/users/' + _id);
+  }
+
   login( email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, {email, password})
     .pipe(
