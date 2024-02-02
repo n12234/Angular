@@ -8,6 +8,7 @@ import { Category } from "../../types/category";
 import { NgFor } from '@angular/common';
 import { ProductsCardComponent } from '../../components/products-card/products-card.component';
 
+
 @Component({
   selector: 'app-product-detail',
   standalone: true,

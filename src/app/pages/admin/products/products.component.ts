@@ -7,9 +7,10 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CategoryService } from '../../../services/category.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { SweetalertService } from '../../../services/sweetalert.service';
+import { PaginationComponent } from "../pagination/pagination.component";
 
 @Component({
   selector: 'app-products',
@@ -21,33 +22,45 @@ import { SweetalertService } from '../../../services/sweetalert.service';
     FormsModule,
     NgIf,
     ReactiveFormsModule,
+    PaginationComponent,
+    NgxPaginationModule
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css',
 })
 export class ProductsComponent {
-  searchControl = new FormControl('');
+  // searchControl = new FormControl('');
   categories: string[] = [];
-  selectedCategories: string[] = [];
+  // selectedCategories: string[] = [];
   products: any[] = [];
-  // filterForm!: FormGroup;
-  // pageSize = 3;
-  // currentPage = 1;
-  // pageCount = 1;
-  // pages: number[] = [];
+  totalProducts: number = 0;
+  pageSize: number = 4;
+  currentPage: number = 1;
+  category: string = '';
+  search: string = '';
 
   productService = inject(ProductService);
   categoryService = inject(CategoryService);
   constructor(
-    private http: HttpClient,
     private sweetalertService: SweetalertService
-    ) {}
+  ) {}
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
-    this.loadCategories();
     this.loadProducts();
-    // this.getProducts();
+    this.loadCategories();
+  }
+
+  loadProducts(page: number = 1): void {
+    this.productService.getProducts(
+        page, this.pageSize, 
+        this.category, 
+        this.search)
+      .subscribe((data) => {
+      this.products = data.products;
+      this.totalProducts = data.totalProducts;
+      this.currentPage = page;
+    });
   }
 
   loadCategories(): void {
@@ -56,65 +69,12 @@ export class ProductsComponent {
     });
   }
 
-  loadProducts(): void {
-    this.productService
-      .getProducts(this.selectedCategories)
-      .subscribe((data) => {
-        this.products = data;
-      });
-  }
 
-  filterProductsByCategories(): void {
-    this.loadProducts();
-  }
-
-  searchProducts(): void {
-    const keyword = this.searchControl.value;
-    if (keyword && typeof keyword === 'string') {
-      this.productService.searchProducts(keyword).subscribe((data) => {
-        this.products = data;
-      });
-    } else {
-      this.products = [];
-    }
-  }
-
-  // getProducts(): void {
-  //   const apiUrl = `http://localhost:3000/products?page=${this.currentPage}&pageSize=${this.pageSize}`;
-
-  //   this.http.get<any[]>(apiUrl).subscribe(
-  //     (data) => {
-  //       this.products = data;
-  //       this.updatePageCount();
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }
-
-  // updatePageCount(): void {
-  //   this.pageCount = Math.ceil(this.products.length / this.pageSize);
-  //   this.pages = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-  // }
-
-  // goToPage(page: number): void {
-  //   if (page >= 1 && page <= this.pageCount) {
-  //     this.currentPage = page;
-  //     this.getProducts();
-  //   }
-  // }
-
-  // nextPage(): void {
-  //   this.goToPage(this.currentPage + 1);
-  // }
-
-  // prevPage(): void {
-  //   this.goToPage(this.currentPage - 1);
-  // }
-
-  async deleteProduct (_id: string) {
-    const confirmed = await this.sweetalertService.confirm('Bạn có muốn xoá không?', 'This action cannot be undone.');
+  async deleteProduct(_id: string) {
+    const confirmed = await this.sweetalertService.confirm(
+      'Bạn có muốn xoá không?',
+      'This action cannot be undone.'
+    );
     try {
       if (confirmed) {
         this.productService
@@ -125,10 +85,10 @@ export class ProductsComponent {
                 (product) => product._id !== _id
               ))
           );
-          this.sweetalertService.success('Success', 'Xoá thành công!')
+        this.sweetalertService.success('Success', 'Xoá thành công!');
       }
     } catch (error) {
-      this.sweetalertService.error('Error', 'Xoá không thành công!')
+      this.sweetalertService.error('Error', 'Xoá không thành công!');
     }
   }
 }

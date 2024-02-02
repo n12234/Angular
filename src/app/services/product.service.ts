@@ -17,21 +17,20 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
 
-  // apiAdminUrl = 'http://localhost:8000/api/products'
-  apiAdminUrl = 'https://nodejs-rose-psi.vercel.app/api/products'
+  // apiUrl = 'http://localhost:8000/api/products'
+  private apiAdminUrl = 'https://nodejs-rose-psi.vercel.app/api/products'
 
   http = inject(HttpClient)
   constructor() { }
 
   getProductList() {
-    return this.http.get<Product[]>('https://nodejs-rose-psi.vercel.app/api/products')
+    return this.http.get<Product[]>('https://nodejs-rose-psi.vercel.app/products')
   }
 
-  getProducts(categories: string[] | string): Observable<any[]> {
-    const categoryArray = Array.isArray(categories) ? categories : [categories];
-    const categoryParam = categoryArray.length > 0 ? `?category=${categoryArray.join(',')}` : '';
-    const url = `${this.apiAdminUrl}${categoryParam}`;
-    return this.http.get<any[]>(url);
+
+  getProducts(page: number, pageSize: number, category?: string, search?: string): Observable<any> {
+    const url = `${this.apiAdminUrl}?page=${page}&pageSize=${pageSize}&category=${category}&search=${search}`;
+    return this.http.get(url);
   }
 
   getProductDetail(_id: string) {

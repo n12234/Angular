@@ -5,22 +5,24 @@
       class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       type="text"
       placeholder="Search products..."
-      [formControl]="searchControl"
+      [(ngModel)]="search"
+      (change)="loadProducts()"
     />
     <button
       class="text-white absolute ml-[560px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      (click)="searchProducts()"
+
     >
       Search
     </button>
   </div>
   <div class="border border-gray-300 rounded-lg p-2.5 ml-5">
-    <label for="categorySelect">Danh mục:</label>
+    <label for="category">Danh mục:</label>
     <select
-      id="categorySelect"
-      [(ngModel)]="selectedCategories"
-      (change)="filterProductsByCategories()"
+      id="category"
+      [(ngModel)]="category" 
+      (change)="loadProducts()"
     >
+      <option value="">Filter By Category</option>
       <option *ngFor="let category of categories" [value]="category">
         {{ category }}
       </option>
@@ -76,70 +78,9 @@
     </tbody>
   </table>
 </div>
-
-<!-- <nav
-  aria-label="Page navigation example"
-  class="flex items-center justify-center mt-3"
->
-  <ul class="flex items-center -space-x-px h-10 text-base">
-    <li>
-      <button
-        (click)="prevPage()"
-        [disabled]="currentPage === 1"
-        class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer"
-      >
-        <svg
-          class="w-3 h-3 rtl:rotate-180"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 6 10"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M5 1 1 5l4 4"
-          />
-        </svg>
-      </button>
-    </li>
-    <li>
-      <span
-        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
-        Page {{ currentPage }} of {{ pageCount }}</span
-      >
-    </li>
-    <li>
-      <button
-        (click)="nextPage()"
-        [disabled]="currentPage === pageCount"
-        class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer"
-      >
-        <svg
-          class="w-3 h-3 rtl:rotate-180"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 6 10"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 9 4-4-4-4"
-          />
-        </svg>
-      </button>
-    </li>
-  </ul>
-</nav> -->
-<!-- 
-<div>
-  <button (click)="prevPage()" [disabled]="currentPage === 1">Prev</button>
-  <span> Page {{ currentPage }} of {{ pageCount }} </span>
-  <button (click)="nextPage()" [disabled]="currentPage === pageCount">Next</button>
-</div> -->
+<app-pagination
+  [totalProducts]="totalProducts"
+  [productsPerPage]="pageSize"
+  [currentPage]="currentPage"
+  (onPageChange)="loadProducts($event)"
+/>
